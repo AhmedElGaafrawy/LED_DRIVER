@@ -5,19 +5,28 @@
  *  Version			: 1.0.1
  *  Author			: Ahmed El-Gaafarwy
  */
-#include "../LIBRARY/stdTypes.h"
-#include "../LIBRARY/BIT_MATH.h"
-#include "../LIBRARY/errorStates.h"
-
-//#include "DIO_int.h"
-#include "DIO_priv.h"
-#include "DIO_config.h"
-
 
 /*****************************************************************************/
+/*****************************************************************************/
+/*****************************************************************************/
+/**/																	   /**/
+/**/																	   /**/
 /**************   Use these function to configure DIO by PINS   **************/
+/**/																	   /**/
+/**/																	   /**/
+/*****************************************************************************/
+/*****************************************************************************/
 /*****************************************************************************/
 
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_PINS_enuInit. 									**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: void.					   								**/
+/**	Functionality	: Setting the initial direction of DIO pins. 		    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_PINS_enuInit			(void)
 {
 	ERROR_STATES error_enuState =ES_NOT_OK;
@@ -34,39 +43,48 @@ ERROR_STATES DIO_PINS_enuInit			(void)
 	return error_enuState;
 }
 
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_PINS_enuSetPinDirection.							**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Pin number and Direction(Input or Output).   			**/
+/**	Functionality	: Setting the direction of specific pin at run time.    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_PINS_enuSetPinDirection(u8 Copy_u8PinID , u8 Copy_u8PinDirection)
 {
 	ERROR_STATES error_enuState =ES_OK;
 
+
 	if( Copy_u8PinID < DIO_PIN8 )
 	{
-		if 		(Copy_u8PinDirection == PIN_OUTPUT)		DDRA|= (ONE<<Copy_u8PinID);
-		else if (! Copy_u8PinDirection)					DDRA&=~(ONE<<Copy_u8PinID);
-		else	error_enuState 			=				ES_OUT_OF_RANGE;
+		if 		(Copy_u8PinDirection)		DDRA|= (ONE<<Copy_u8PinID);
+		else if (! Copy_u8PinDirection)		DDRA&=~(ONE<<Copy_u8PinID);
+		else	error_enuState 		=		ES_OUT_OF_RANGE;
 	}
 
 	else if (Copy_u8PinID >= DIO_PIN8 && Copy_u8PinID < DIO_PIN16 )
 	{
 		Copy_u8PinID -= DIO_PIN8;
-		if 		(Copy_u8PinDirection == PIN_OUTPUT)		DDRB|= (ONE<<Copy_u8PinID);
-		else if (! Copy_u8PinDirection)					DDRB&=~(ONE<<Copy_u8PinID);
-		else	error_enuState 				=			ES_OUT_OF_RANGE;
+		if 		(Copy_u8PinDirection)		DDRB|= (ONE<<Copy_u8PinID);
+		else if (! Copy_u8PinDirection)		DDRB&=~(ONE<<Copy_u8PinID);
+		else	error_enuState 		=		ES_OUT_OF_RANGE;
 	}
 
 	else if (Copy_u8PinID >= DIO_PIN16 && Copy_u8PinID < DIO_PIN24 )
 	{
 		Copy_u8PinID -= DIO_PIN16;
-		if 		(Copy_u8PinDirection == PIN_OUTPUT)		DDRC|= (ONE<<Copy_u8PinID);
-		else if (! Copy_u8PinDirection)					DDRC&=~(ONE<<Copy_u8PinID);
-		else	error_enuState 				=			ES_OUT_OF_RANGE;
+		if 		(Copy_u8PinDirection)		DDRC|= (ONE<<Copy_u8PinID);
+		else if (! Copy_u8PinDirection)		DDRC&=~(ONE<<Copy_u8PinID);
+		else	error_enuState 		=		ES_OUT_OF_RANGE;
 	}
 
 	else if (Copy_u8PinID >= DIO_PIN24 && Copy_u8PinID < DIO_PIN31 )
 	{
 		Copy_u8PinID -= DIO_PIN24;
-		if 		(Copy_u8PinDirection == PIN_OUTPUT)		DDRD|= (ONE<<Copy_u8PinID);
-		else if (! Copy_u8PinDirection)					DDRD&=~(ONE<<Copy_u8PinID);
-		else	error_enuState 				=			ES_OUT_OF_RANGE;
+		if 		(Copy_u8PinDirection)		DDRD|= (ONE<<Copy_u8PinID);
+		else if (! Copy_u8PinDirection)		DDRD&=~(ONE<<Copy_u8PinID);
+		else	error_enuState 		=		ES_OUT_OF_RANGE;
 	}
 
 	else
@@ -78,39 +96,47 @@ ERROR_STATES DIO_PINS_enuSetPinDirection(u8 Copy_u8PinID , u8 Copy_u8PinDirectio
 }
 
 
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_PINS_enuSetPinValue.								**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Pin number and Value(High or Low).		   			**/
+/**	Functionality	: Setting the value of specific pin at run time.	    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_PINS_enuSetPinValue	(u8 Copy_u8PinID , u8 Copy_u8PinValue)
 {
 	ERROR_STATES error_enuState =ES_OK;
 
 	if ( Copy_u8PinID < DIO_PIN8)
 	{
-		if 		(Copy_u8PinValue  == PIN_HIGH)		PORTA|= (ONE<<Copy_u8PinID);
-		else if (! Copy_u8PinValue)					PORTA&=~(ONE<<Copy_u8PinID);
-		else	error_enuState 			=			ES_OUT_OF_RANGE;
+		if 		(Copy_u8PinValue)		PORTA|= (ONE<<Copy_u8PinID);
+		else if (! Copy_u8PinValue)		PORTA&=~(ONE<<Copy_u8PinID);
+		else	error_enuState 		=		ES_OUT_OF_RANGE;
 	}
 
 	else if (Copy_u8PinID >= DIO_PIN8 && Copy_u8PinID < DIO_PIN16 )
 	{
 		Copy_u8PinID -= DIO_PIN8;
-		if 		(Copy_u8PinValue  == PIN_HIGH)		PORTB|= (ONE<<Copy_u8PinID);
-		else if (! Copy_u8PinValue)					PORTB&=~(ONE<<Copy_u8PinID);
-		else	error_enuState 			=			ES_OUT_OF_RANGE;
+		if 		(Copy_u8PinValue)		PORTB|= (ONE<<Copy_u8PinID);
+		else if (! Copy_u8PinValue)		PORTB&=~(ONE<<Copy_u8PinID);
+		else	error_enuState 		=		ES_OUT_OF_RANGE;
 	}
 
 	else if (Copy_u8PinID >= DIO_PIN16 && Copy_u8PinID < DIO_PIN24 )
 	{
 		Copy_u8PinID -= DIO_PIN16;
-		if 		(Copy_u8PinValue  == PIN_HIGH)		PORTC|= (ONE<<Copy_u8PinID);
-		else if (! Copy_u8PinValue)					PORTC&=~(ONE<<Copy_u8PinID);
-		else	error_enuState 			=			ES_OUT_OF_RANGE;
+		if 		(Copy_u8PinValue)		PORTC|= (ONE<<Copy_u8PinID);
+		else if (! Copy_u8PinValue)		PORTC&=~(ONE<<Copy_u8PinID);
+		else	error_enuState 		=		ES_OUT_OF_RANGE;
 	}
 
 	else if (Copy_u8PinID >= DIO_PIN24 && Copy_u8PinID < DIO_PIN31 )
 	{
 		Copy_u8PinID -= DIO_PIN24;
-		if 		(Copy_u8PinValue  == PIN_HIGH)		PORTD|= (ONE<<Copy_u8PinID);
-		else if (! Copy_u8PinValue)					PORTD&=~(ONE<<Copy_u8PinID);
-		else	error_enuState 			=			ES_OUT_OF_RANGE;
+		if 		(Copy_u8PinValue)		PORTD|= (ONE<<Copy_u8PinID);
+		else if (! Copy_u8PinValue)		PORTD&=~(ONE<<Copy_u8PinID);
+		else	error_enuState 		=		ES_OUT_OF_RANGE;
 	}
 
 	else
@@ -122,6 +148,15 @@ ERROR_STATES DIO_PINS_enuSetPinValue	(u8 Copy_u8PinID , u8 Copy_u8PinValue)
 }
 
 
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_PINS_enuTogglePin.								**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Pin number.								   			**/
+/**	Functionality	: Toggling the value of specific pin at run time.	    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_PINS_enuTogglePin		( u8 Copy_u8PinID )
 {
 	ERROR_STATES error_enuState =ES_NOT_OK;
@@ -129,27 +164,27 @@ ERROR_STATES DIO_PINS_enuTogglePin		( u8 Copy_u8PinID )
 
 	if ( Copy_u8PinID < DIO_PIN8 )
 	{
-		PORTA ^= (ONE<<Copy_u8PinID);
+		PORTA^= (ONE<<Copy_u8PinID);
 		error_enuState =ES_OK;
 	}
 
 	else if (Copy_u8PinID >= DIO_PIN8 && Copy_u8PinID < DIO_PIN16 )
 	{
 		Copy_u8PinID -= DIO_PIN8;
-		PORTB ^= (ONE<<Copy_u8PinID);
+		PORTB^= (ONE<<Copy_u8PinID);
 		error_enuState =ES_OK;
 	}
 
 	else if (Copy_u8PinID >= DIO_PIN16 && Copy_u8PinID < DIO_PIN24 )
 	{
 		Copy_u8PinID -= DIO_PIN16;
-		PORTC ^= (ONE<<Copy_u8PinID);
+		PORTC^= (ONE<<Copy_u8PinID);
 		error_enuState =ES_OK;
 	}
 	else if (Copy_u8PinID >= DIO_PIN24 && Copy_u8PinID < DIO_PIN31 )
 	{
 		Copy_u8PinID -= DIO_PIN24;
-		PORTD ^= (ONE<<Copy_u8PinID);
+		PORTD^= (ONE<<Copy_u8PinID);
 		error_enuState =ES_OK;
 	}
 
@@ -162,34 +197,43 @@ ERROR_STATES DIO_PINS_enuTogglePin		( u8 Copy_u8PinID )
 }
 
 
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_PINS_enuGetPinValue.								**/
+/**	Return Type		: ERROR_STATES enum and The the pin value as a pointer. **/
+/**	Arguments		: Pin number.								   			**/
+/**	Functionality	: Getting the value of specific pin at run time		    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_PINS_enuGetPinValue	(u8 Copy_u8PinID , u8 * Copy_Pu8PinValue)
 {
 	ERROR_STATES error_enuState =ES_NOT_OK;
 
 	if ( Copy_u8PinID < DIO_PIN8 )
 	{
-		* Copy_Pu8PinValue = ((PINA >> Copy_u8PinID) & ONE );
+		*Copy_Pu8PinValue= ((PINA>>Copy_u8PinID) & ONE );
 		error_enuState =ES_OK;
 	}
 
 	else if (Copy_u8PinID >= DIO_PIN8 && Copy_u8PinID < DIO_PIN16 )
 	{
 		Copy_u8PinID -= DIO_PIN8;
-		* Copy_Pu8PinValue = ((PINB >> Copy_u8PinID) & ONE );
+		*Copy_Pu8PinValue= ((PINB>>Copy_u8PinID) & ONE );
 		error_enuState =ES_OK;
 	}
 
 	else if (Copy_u8PinID >= DIO_PIN16 && Copy_u8PinID < DIO_PIN24 )
 	{
 		Copy_u8PinID -= DIO_PIN16;
-		* Copy_Pu8PinValue = ((PINC >> Copy_u8PinID) & ONE );
+		*Copy_Pu8PinValue= ((PINC>>Copy_u8PinID) & ONE );
 		error_enuState =ES_OK;
 	}
 
 	else if (Copy_u8PinID >= DIO_PIN24 && Copy_u8PinID < DIO_PIN31 )
 	{
 		Copy_u8PinID -= DIO_PIN24;
-		* Copy_Pu8PinValue = ((PIND >> Copy_u8PinID) & ONE );
+		*Copy_Pu8PinValue= ((PIND>>Copy_u8PinID) & ONE );
 		error_enuState =ES_OK;
 	}
 
@@ -207,10 +251,26 @@ ERROR_STATES DIO_PINS_enuGetPinValue	(u8 Copy_u8PinID , u8 * Copy_Pu8PinValue)
 
 
 /*****************************************************************************/
+/*****************************************************************************/
+/*****************************************************************************/
+/**/																	   /**/
+/**/																	   /**/
 /*************   Use these function to  configure DIO by PORTS   *************/
+/**/																	   /**/
+/**/																	   /**/
+/*****************************************************************************/
+/*****************************************************************************/
 /*****************************************************************************/
 
 
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_enuSetPinDirection.								**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Port and Pin number and Direction(Input or output).	**/
+/**	Functionality	: Setting the direction of specific pin at run time.    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_enuSetPinDirection 	(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Copy_u8PinDirection)
 {
 	ERROR_STATES error_enuState =ES_NOT_OK;
@@ -236,6 +296,15 @@ ERROR_STATES DIO_enuSetPinDirection 	(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Co
 }
 
 
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_enuSetPinValue.									**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Port and Pin number and Value(High or Low).			**/
+/**	Functionality	: Setting the value of specific pin at run time.	    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_enuSetPinValue			(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Copy_u8PinValue)
 {
 	ERROR_STATES error_enuState =ES_NOT_OK;
@@ -261,6 +330,15 @@ ERROR_STATES DIO_enuSetPinValue			(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Copy_
 }
 
 
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_enuTogglePinValue.								**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Port and Pin number.									**/
+/**	Functionality	: Toggling the value of specific pin at run time.	    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_enuTogglePinValue		(u8 Copy_u8PortID , u8 Copy_u8PinID )
 {
 	ERROR_STATES error_enuState =ES_NOT_OK;
@@ -286,6 +364,15 @@ ERROR_STATES DIO_enuTogglePinValue		(u8 Copy_u8PortID , u8 Copy_u8PinID )
 }
 
 
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_enuGetPinValue.									**/
+/**	Return Type		: ERROR_STATES enum and The the pin value as a pointer. **/
+/**	Arguments		: Port and Pin number.						   			**/
+/**	Functionality	: Getting the value of specific pin at run time.	    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_enuGetPinValue			(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 * Copy_Pu8PinValue)
 {
 	ERROR_STATES error_enuState =ES_NOT_OK;
@@ -311,6 +398,15 @@ ERROR_STATES DIO_enuGetPinValue			(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 * Cop
 }
 
 
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_enuSetPortDirection.								**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Port number and the value of Direction.				**/
+/**	Functionality	: Setting the direction of specific port at run time.   **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_enuSetPortDirection 	(u8 Copy_u8PortID , u8 Copy_u8PortDirection)
 {
 	ERROR_STATES error_enuState =ES_NOT_OK;
@@ -328,6 +424,15 @@ ERROR_STATES DIO_enuSetPortDirection 	(u8 Copy_u8PortID , u8 Copy_u8PortDirectio
 }
 
 
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_enuSetPortValue.									**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Port number and the Value.							**/
+/**	Functionality	: Setting the value of specific port at run time.	    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_enuSetPortValue		(u8 Copy_u8PortID , u8 Copy_u8PortValue)
 {
 	ERROR_STATES error_enuState =ES_NOT_OK;
@@ -345,6 +450,15 @@ ERROR_STATES DIO_enuSetPortValue		(u8 Copy_u8PortID , u8 Copy_u8PortValue)
 }
 
 
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_enuTogglePortValue.								**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Port number.											**/
+/**	Functionality	: Toggling the value of specific port at run time.	    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_enuTogglePortValue		(u8 Copy_u8PortID )
 {
 	ERROR_STATES error_enuState =ES_NOT_OK;
@@ -362,6 +476,16 @@ ERROR_STATES DIO_enuTogglePortValue		(u8 Copy_u8PortID )
 }
 
 
+
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: DIO_enuGetPortValue.									**/
+/**	Return Type		: ERROR_STATES enum and The the port value as a pointer.**/
+/**	Arguments		: Port number.								   			**/
+/**	Functionality	: Getting the value of specific port at run time.	    **/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES DIO_enuGetPortValue		(u8 Copy_u8PortID , u8 * Copy_Pu8PortValue)
 {
 	ERROR_STATES error_enuState =ES_NOT_OK;

@@ -2,8 +2,8 @@
  * LED_prog.c
  *
  *  Created on	: Mar 31, 2020
- *  Version			: 1.0.1
- *  Author			: Ahmed El-Gaafarwy
+ *  Version		: 1.0.1
+ *  Author		: Ahmed El-Gaafarwy
  */
 #include "../LIBRARY/stdTypes.h"
 #include "../LIBRARY/BIT_MATH.h"
@@ -17,6 +17,14 @@
 #include "LED_config.h"
 
 
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: LED_enuInit. 											**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: void.					   								**/
+/**	Functionality	: Setting the directions and Turning off the LEDs' pins.**/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES LED_enuInit 		(void)
 {
 	ERROR_STATES error_enuState = ES_NOT_OK;
@@ -31,6 +39,15 @@ ERROR_STATES LED_enuInit 		(void)
 }
 
 
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: LED_enuTurnON. 										**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Number of LED order.					   				**/
+/**	Functionality	: Turnning on the specific LED at run time.				**/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES LED_enuTurnON 		(u8 Copy_u8LED_Order)
 {
 	ERROR_STATES error_enuState = ES_NOT_OK;
@@ -47,6 +64,14 @@ ERROR_STATES LED_enuTurnON 		(u8 Copy_u8LED_Order)
 }
 
 
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: LED_enuTurnON. 										**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Number of LED order.					   				**/
+/**	Functionality	: Toggling the specific LED at run time.				**/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES LED_enuTurnToggle 	(u8 Copy_u8LED_Order)
 {
 	ERROR_STATES error_enuState = ES_NOT_OK;
@@ -79,6 +104,15 @@ ERROR_STATES LED_enuTurnToggle 	(u8 Copy_u8LED_Order)
 }
 
 
+
+/*****************************************************************************/
+/*****************************************************************************/
+/**	Function Name	: LED_enuTurnOFF. 										**/
+/**	Return Type		: ERROR_STATES enum.					   		   		**/
+/**	Arguments		: Number of LED order.					   				**/
+/**	Functionality	: Turnning off the specific LED at run time.			**/
+/*****************************************************************************/
+/*****************************************************************************/
 ERROR_STATES LED_enuTurnOFF 	(u8 Copy_u8LED_Order)
 {
 	ERROR_STATES error_enuState = ES_NOT_OK;
